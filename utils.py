@@ -7,8 +7,16 @@ from parameters import *
 
 Tensor = torch.cuda.FloatTensor if CUDA else torch.FloatTensor
 LongTensor = torch.cuda.LongTensor if CUDA else torch.LongTensor
-randn = lambda *x: torch.randn(*x).cuda() if CUDA else torch.randn
-zeros = lambda *x: torch.zeros(*x).cuda() if CUDA else torch.zeros
+
+# randn = lambda *x: torch.randn(*x).cuda() if CUDA else torch.randn
+randn = torch.randn
+if CUDA:
+    randn = lambda *x: torch.randn(*x).cuda()
+
+# zeros = lambda *x: torch.zeros(*x).cuda() if CUDA else torch.zeros
+zeros = torch.zeros
+if CUDA:
+    zeros = lambda *x: torch.zeros(*x).cuda()
 
 def normalize(x):
 
